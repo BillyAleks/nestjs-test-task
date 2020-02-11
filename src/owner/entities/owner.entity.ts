@@ -15,7 +15,7 @@ export class Owner {
   @Column()
   name: string;
   @Column()
-  purchaseDate: string;
+  purchaseDate: Date;
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()

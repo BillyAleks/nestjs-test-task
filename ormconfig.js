@@ -8,6 +8,8 @@ module.exports = {
     charset: "utf8mb4",
     entities: ["dist/**/*.entity{.ts,.js}"],
     migrations: ["dist/mysql/migration/*.js"],
+    synchronize: false,
+    keepConnectionAlive: true,
     cli: {
         entitiesDir: "src/**/*.entity.ts",
         migrationsDir: "src/mysql/migration"

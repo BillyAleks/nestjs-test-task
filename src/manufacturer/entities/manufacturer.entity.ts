@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn
 } from "typeorm";
-import { Car } from "../../cars/entities/car.entity";
+import { Car } from "../../car/entities/car.entity";
 
 @Entity()
 export class Manufacturer {
@@ -23,7 +23,7 @@ export class Manufacturer {
   cars: Car[];
   @Column()
   phone: string;
-  @Column({ type: "bigint" })
+  @Column({type: "bigint"})
   siret: number;
   @CreateDateColumn()
   createdAt: Date;

@@ -1,16 +1,20 @@
-export class Owner {
-  readonly id: string;
-  readonly name?: string;
-  readonly purchaseDate?: Date;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
+import { IsString, IsUUID, IsNotEmpty, IsDateString } from "class-validator";
 
-  constructor(
-    init: Pick<Owner, "id" | "createdAt" | "updatedAt"> & Partial<Owner>
-  ) {
-    Object.assign(this, init);
-    this.id = init.id;
-    this.createdAt = init.createdAt;
-    this.updatedAt = init.updatedAt;
-  }
+export class Owner {
+  @IsString()
+  @IsUUID()
+  readonly id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
+
+  @IsDateString()
+  readonly purchaseDate: Date;
+
+  @IsDateString()
+  readonly createdAt: Date;
+
+  @IsDateString()
+  readonly updatedAt: Date;
 }

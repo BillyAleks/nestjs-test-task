@@ -1,20 +1,36 @@
-import { Car } from "../../cars/interfaces/car.interface";
+import { Car } from "../../car/interfaces/car.interface";
+import {
+  IsUUID,
+  IsString,
+  IsNotEmpty,
+  IsArray,
+  IsPhoneNumber,
+  IsInt,
+  IsDateString
+} from "class-validator";
 
 export class Manufacturer {
+  @IsUUID()
+  @IsString()
   readonly id: string;
-  readonly name?: string;
-  readonly cars?: Car[];
-  readonly phone?: string;
-  readonly siret?: number;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
 
-  constructor(
-    init: Pick<Manufacturer, "id" | "createdAt" | "updatedAt"> & Partial<Manufacturer>
-  ) {
-    Object.assign(this, init);
-    this.id = init.id;
-    this.createdAt = init.createdAt;
-    this.updatedAt = init.updatedAt;
-  }
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
+
+  @IsArray()
+  readonly cars: Car[];
+
+  @IsString()
+  @IsPhoneNumber("ZZ")
+  readonly phone: string;
+
+  @IsInt()
+  readonly siret: number;
+
+  @IsDateString()
+  readonly createdAt: Date;
+
+  @IsDateString()
+  readonly updatedAt: Date;
 }
