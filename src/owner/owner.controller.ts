@@ -73,7 +73,10 @@ export class OwnerController {
     try {
       await this.ownerService.update(id, updateOwnerDto);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      if (error.message.includes("404")) {
+        throw new NotFoundException(error.message);
+      } else 
+      throw new BadRequestException(error.message);
     }
   }
 

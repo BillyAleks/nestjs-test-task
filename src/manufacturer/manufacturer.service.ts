@@ -32,13 +32,20 @@ export class ManufacturerService {
   }
 
   async create(manufacturerToCreate: CreateManufacturerDto): Promise<void> {
-    console.log("---------------", manufacturerToCreate);
+    if (
+      !manufacturerToCreate.name ||
+      !manufacturerToCreate.phone ||
+      !manufacturerToCreate.siret
+    ) {
+      throw new Error(
+        "Error(400): Bad Request, all required fields should be pointed"
+      );
+    }
     const manufacturer = this.manufacturerRepository.create({
       name: manufacturerToCreate.name,
       phone: manufacturerToCreate.phone,
       siret: manufacturerToCreate.siret
     });
-    console.log("****************", manufacturer);
     await this.manufacturerRepository.save(manufacturer);
   }
 
@@ -46,6 +53,15 @@ export class ManufacturerService {
     id: string,
     manufacturerToUpdate: UpdateManufacturerDto
   ): Promise<void> {
+    if (
+      !manufacturerToUpdate.name &&
+      !manufacturerToUpdate.phone &&
+      !manufacturerToUpdate.siret
+    ) {
+      throw new Error(
+        "Error(400): Bad Request, one of required fields should be pointed"
+      );
+    }
     const manufacturer = await this.manufacturerRepository.findOne(id);
     if (!manufacturer) {
       throw new Error("Error(404): Manufacturer was not found");

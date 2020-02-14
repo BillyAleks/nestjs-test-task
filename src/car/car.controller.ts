@@ -11,6 +11,7 @@ import {
   NotFoundException,
   BadRequestException
 } from "@nestjs/common";
+
 import { CarService } from "./car.service";
 import { Car } from "./interfaces/car.interface";
 import { Manufacturer } from "../manufacturer/interfaces/manufacturer.interface";
@@ -22,7 +23,7 @@ export class CarController {
   constructor(private readonly carService: CarService) {}
 
   @Get()
-  async findAll(): Promise<Car[] | undefined> {
+  async findAll(): Promise<Car[]> {
     try {
       const cars = await this.carService.findAll();
       return cars;
@@ -57,11 +58,12 @@ export class CarController {
     try {
       await this.carService.create(createCarDto);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      if (error.message.includes("404")) {
+        throw new NotFoundException(error.message);
+      } else throw new BadRequestException(error.message);
     }
   }
 
-  // TODO: beautify status codes
   @Put(":id")
   @HttpCode(201)
   async put(
@@ -84,7 +86,9 @@ export class CarController {
     try {
       await this.carService.update(id, updateCarDto);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      if (error.message.includes("404")) {
+        throw new NotFoundException(error.message);
+      } else throw new BadRequestException(error.message);
     }
   }
 

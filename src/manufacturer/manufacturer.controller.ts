@@ -9,7 +9,6 @@ import {
   Param,
   HttpCode,
   NotFoundException,
-  ConflictException,
   BadRequestException,
   UnprocessableEntityException
 } from "@nestjs/common";
@@ -76,7 +75,9 @@ export class ManufacturerController {
     try {
       await this.manufacturerService.update(id, updateManufacturerDto);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      if (error.message.includes("404")) {
+        throw new NotFoundException(error.message);
+      } else throw new BadRequestException(error.message);
     }
   }
 

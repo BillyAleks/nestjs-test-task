@@ -9,7 +9,6 @@ import { Manufacturer } from "../manufacturer/interfaces/manufacturer.interface"
 import { CreateCarDto } from "./interfaces/dto/createCar.dto";
 import { UpdateCarDto } from "./interfaces/dto/updateCar.dto";
 
-
 @Injectable()
 export class CarService {
   constructor(
@@ -22,7 +21,7 @@ export class CarService {
   ) {}
 
   async findAll(): Promise<Car[]> {
-    const cars = await this.carRepository.createQueryBuilder("car").getMany();
+    const cars = await this.carRepository.find();
     if (cars.length === 0) {
       throw new Error("Error(404): No cars were found");
     }
@@ -38,17 +37,26 @@ export class CarService {
   }
 
   async findOneManufacturer(id: string): Promise<Manufacturer> {
-    const car = await this.carRepository.findOne(id);
+    const car = await this.carRepository.findOne(id, {
+      relations: ["manufacturer"]
+    });
     if (!car) {
       throw new Error("Error(404): No car were found");
-    }
-    if (!car.manufacturer) {
-      throw new Error("Error(404): No manufacturer were found");
     }
     return car.manufacturer;
   }
 
   async create(carToCreate: CreateCarDto): Promise<void> {
+    if (
+      !carToCreate.firstRegistrationDate ||
+      !carToCreate.manufacturerId ||
+      !carToCreate.ownersIds ||
+      !carToCreate.price
+    ) {
+      throw new Error(
+        "Error(400): Bad Request, all required fields should be pointed"
+      );
+    }
     const manufacturerData = await this.manufacturerRepository.findOne(
       carToCreate.manufacturerId
     );
@@ -58,7 +66,7 @@ export class CarService {
     if (!manufacturerData) {
       throw new Error("Error(404): Such manufacturer was not found");
     } else if (ownersData.length === 0) {
-      throw new Error("Error(404): Such owner was not found");
+      throw new Error("Error(404): Such owners were not found");
     }
     const car = this.carRepository.create({
       manufacturer: manufacturerData,
@@ -70,6 +78,30 @@ export class CarService {
   }
 
   async update(id: string, carToUpdate: UpdateCarDto): Promise<void> {
+    if (
+      !carToUpdate.firstRegistrationDate &&
+      !carToUpdate.manufacturerId &&
+      !carToUpdate.ownersIds &&
+      !carToUpdate.price
+    ) {
+      throw new Error(
+        "Error(400): Bad Request, one of required fields should be pointed"
+      );
+    } else if (carToUpdate.manufacturerId) {
+      const manufacturerData = await this.manufacturerRepository.findOne(
+        carToUpdate.manufacturerId
+      );
+      if (!manufacturerData) {
+        throw new Error("Error(404): Such manufacturer was not found");
+      }
+    } else if (carToUpdate.ownersIds) {
+      const ownersData = await this.ownerRepository.findByIds(
+        carToUpdate.ownersIds
+      );
+      if (ownersData.length === 0) {
+        throw new Error(`Error(404): Such owners were not found`);
+      }
+    }
     const car = await this.carRepository.findOne(id);
     if (!car) {
       throw new Error("Error(404): Car was not found");
@@ -79,7 +111,12 @@ export class CarService {
   }
 
   async put(id: string, carToPut: CreateCarDto): Promise<void> {
-    if (!carToPut.price || !carToPut.ownersIds || !carToPut.manufacturerId || !carToPut.ownersIds) {
+    if (
+      !carToPut.price ||
+      !carToPut.ownersIds ||
+      !carToPut.manufacturerId ||
+      !carToPut.ownersIds
+    ) {
       throw new Error("Error(400): All fields are required");
     }
     const car = await this.carRepository.findOne(id);

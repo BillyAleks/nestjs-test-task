@@ -8,7 +8,7 @@ import { Owner } from "../owner/entities/owner.entity";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Car, Manufacturer, Owner])],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, CarService],
   providers: [CarService],
   controllers: [CarController]
 })

@@ -32,6 +32,11 @@ export class OwnerService {
   }
 
   async create(ownerToCreate: CreateOwnerDto): Promise<void> {
+    if (!ownerToCreate.name || !ownerToCreate.purchaseDate) {
+      throw new Error(
+        "Error(400): Bad Request, all required fields should be pointed"
+      );
+    }
     const owner = this.ownerRepository.create({
       name: ownerToCreate.name,
       purchaseDate: ownerToCreate.purchaseDate
@@ -40,6 +45,11 @@ export class OwnerService {
   }
 
   async update(id: string, ownerToUpdate: UpdateOwnerDto): Promise<void> {
+    if (!ownerToUpdate.name && !ownerToUpdate.purchaseDate) {
+      throw new Error(
+        "Error(400): Bad Request, one of required fields should be pointed"
+      );
+    }
     const owner = await this.ownerRepository.findOne(id);
     if (!owner) {
       throw new Error("Error(404): Owner was not found");
