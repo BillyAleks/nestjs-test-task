@@ -47,7 +47,7 @@ export class OwnerController {
     try {
       await this.ownerService.create(createOwnerDto);
     } catch (error) {
-      throw new UnprocessableEntityException(error.message);
+      throw new BadRequestException(error.message);
     }
   }
 

@@ -63,16 +63,26 @@ describe("CarService", () => {
     ];
 
     carMock = {
-      id: "5c431318-8699-4f2f-930c-6cb7263489c9",
+      id: "5c431318-8699-4f2f-930c-6cb726348777",
       manufacturer: manufacturerMock,
       owners: ownersMock,
-      price: 5000,
+      price: 14000,
       firstRegistrationDate: now,
       createdAt: now,
       updatedAt: now
     };
 
-    carsMock = [...carMock];
+    carsMock = [
+      {
+        id: "5c431318-8699-4f2f-930c-6cb7263489c9",
+        manufacturer: manufacturerMock,
+        owners: ownersMock,
+        price: 5000,
+        firstRegistrationDate: now,
+        createdAt: now,
+        updatedAt: now
+      }
+    ];
 
     dtoMock = {
       manufacturerId: "08b4ce7e-41bc-45c1-8611-d72a7b0a216d",
@@ -84,7 +94,9 @@ describe("CarService", () => {
     carRepoMock = {
       find: jest.fn(async () => carsMock),
       findOne: jest.fn(async () => carsMock[0]),
-      create: jest.fn(() => carsMock[0])
+      create: jest.fn(),
+      save: jest.fn(),
+      delete: jest.fn()
     };
 
     manufacturerRepoMock = {
@@ -95,7 +107,7 @@ describe("CarService", () => {
       findByIds: jest.fn(async () => ownersMock)
     };
 
-    carControllerMock = new CarController(carServiceMock as CarService);
+    carServiceMock = new CarService(, manufacturerMock, ownersMock)
   });
 
   it("should be defined", () => {

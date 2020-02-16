@@ -49,7 +49,7 @@ export class ManufacturerController {
     try {
       await this.manufacturerService.create(createManufacturerDto);
     } catch (error) {
-      throw new UnprocessableEntityException(error.message);
+      throw new BadRequestException(error.message);
     }
   }
 
