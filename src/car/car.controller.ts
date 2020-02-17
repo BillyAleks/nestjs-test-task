@@ -11,6 +11,7 @@ import {
   NotFoundException,
   BadRequestException
 } from "@nestjs/common";
+import { ApiTags, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestResponse, ApiCreatedResponse } from "@nestjs/swagger";
 
 import { CarService } from "./car.service";
 import { Car } from "./interfaces/car.interface";
@@ -18,11 +19,14 @@ import { Manufacturer } from "../manufacturer/interfaces/manufacturer.interface"
 import { UpdateCarDto } from "./interfaces/dto/updateCar.dto";
 import { CreateCarDto } from "./interfaces/dto/createCar.dto";
 
+@ApiTags('cars')
 @Controller("cars")
 export class CarController {
   constructor(private readonly carService: CarService) {}
 
   @Get()
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async findAll(): Promise<Car[]> {
     try {
       const cars = await this.carService.findAll();
@@ -33,6 +37,8 @@ export class CarController {
   }
 
   @Get(":id")
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async findOne(@Param("id") id: string): Promise<Car> {
     try {
       const car = await this.carService.findOne(id);
@@ -43,6 +49,8 @@ export class CarController {
   }
 
   @Get(":id/manufacturer")
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async findOneManufacturer(@Param("id") id: string): Promise<Manufacturer> {
     try {
       const manufacturer = await this.carService.findOneManufacturer(id);
@@ -54,6 +62,9 @@ export class CarController {
 
   @Post()
   @HttpCode(201)
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
+  @ApiNotFoundResponse()
   async create(@Body() createCarDto: CreateCarDto): Promise<void> {
     try {
       await this.carService.create(createCarDto);
@@ -65,6 +76,8 @@ export class CarController {
   }
 
   @Put(":id")
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
   @HttpCode(201)
   async put(
     @Param("id") id: string,
@@ -78,6 +91,9 @@ export class CarController {
   }
 
   @Patch(":id")
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
+  @ApiNotFoundResponse()
   @HttpCode(201)
   async update(
     @Param("id") id: string,
@@ -93,6 +109,8 @@ export class CarController {
   }
 
   @Delete(":id")
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async delete(@Param("id") id: string): Promise<void> {
     try {
       await this.carService.delete(id);

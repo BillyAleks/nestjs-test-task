@@ -10,7 +10,7 @@ import { CreateCarDto } from "./interfaces/dto/createCar.dto";
 const now = new Date();
 const fakeId = "123e4567-e89b-12d3-a456-426655440000";
 
-let carServiceMock: CarService;
+let carService: CarService;
 let carRepoMock: Partial<Repository<Car>>;
 let manufacturerRepoMock: Partial<Repository<Manufacturer>>;
 let ownerRepoMock: Partial<Repository<Owner>>;
@@ -40,7 +40,7 @@ describe("CarService", () => {
       ]
     }).compile();
 
-    carServiceMock = module.get<CarService>(CarService);
+    carService = module.get<CarService>(CarService);
 
     manufacturerMock = {
       id: "08b4ce7e-41bc-45c1-8611-d72a7b0a216d",
@@ -94,7 +94,7 @@ describe("CarService", () => {
     carRepoMock = {
       find: jest.fn(async () => carsMock),
       findOne: jest.fn(async () => carsMock[0]),
-      create: jest.fn(),
+      create: jest.fn(() => {}),
       save: jest.fn(),
       delete: jest.fn()
     };

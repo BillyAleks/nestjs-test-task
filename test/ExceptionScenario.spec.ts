@@ -226,7 +226,6 @@ describe(`ExceptionScenario: url: ${url}`, () => {
           });
       });
     });
-//////////////////////////////////////////////////////////////////////////////////////////
     describe("Manufacturer Exceptions", () => {
       beforeEach(async () => {
         await delay(200);
@@ -374,7 +373,6 @@ describe(`ExceptionScenario: url: ${url}`, () => {
           });
       });
     });
-    ///////////////////////////////////////////////////////////////////////////
     describe("Car Exceptions", () => {
       beforeEach(async () => {
         await delay(200);

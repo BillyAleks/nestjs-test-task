@@ -70,10 +70,6 @@ describe("Owner Controller", () => {
     expect(ownerControllerMock).toBeDefined();
   });
 
-
-  ////////////////////////////////////////////////////////////////////
-
-
   test("should return array of owners", async () => {
     const res = await ownerControllerMock.findAll();
 

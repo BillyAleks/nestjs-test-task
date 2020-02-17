@@ -9,19 +9,22 @@ import {
   Param,
   HttpCode,
   NotFoundException,
-  BadRequestException,
-  UnprocessableEntityException
+  BadRequestException
 } from "@nestjs/common";
 import { OwnerService } from "./owner.service";
 import { CreateOwnerDto } from "./interfaces/dto/createOwner.dto";
 import { UpdateOwnerDto } from "./interfaces/dto/updateOwner.dto";
 import { Owner } from "./entities/owner.entity";
+import { ApiTags, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestResponse, ApiCreatedResponse } from "@nestjs/swagger";
 
+@ApiTags('owners')
 @Controller("owners")
 export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}
 
   @Get()
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async findAll(): Promise<Owner[]> {
     try {
       const owners = await this.ownerService.findAll();
@@ -32,6 +35,8 @@ export class OwnerController {
   }
 
   @Get(":id")
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async findOne(@Param("id") id: string): Promise<Owner> {
     try {
       const owner = await this.ownerService.findOne(id);
@@ -42,6 +47,8 @@ export class OwnerController {
   }
 
   @Post()
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
   @HttpCode(201)
   async create(@Body() createOwnerDto: CreateOwnerDto): Promise<void> {
     try {
@@ -52,6 +59,8 @@ export class OwnerController {
   }
 
   @Put(":id")
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
   @HttpCode(201)
   async put(
     @Param("id") id: string,
@@ -65,6 +74,9 @@ export class OwnerController {
   }
 
   @Patch(":id")
+  @ApiCreatedResponse()
+  @ApiBadRequestResponse()
+  @ApiNotFoundResponse()
   @HttpCode(201)
   async update(
     @Param("id") id: string,
@@ -81,6 +93,8 @@ export class OwnerController {
   }
 
   @Delete(":id")
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   async delete(@Param("id") id: string) {
     try {
       await this.ownerService.delete(id);
