@@ -49,16 +49,14 @@ $ npm run start:docker-app:testfree
 
 ## Start an application
 
-```
-#Package installation.
+```bash
+# package installation.
 $ npm i
-```
-```
-# Start Database.
+
+# start database.
 $ npm run start:db
-```
-```
-# Run migration and start API.
+
+# run migration and start API.
 $ npm run start:dev
 ```
 
