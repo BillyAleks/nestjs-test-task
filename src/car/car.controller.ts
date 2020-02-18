@@ -11,7 +11,13 @@ import {
   NotFoundException,
   BadRequestException
 } from "@nestjs/common";
-import { ApiTags, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestResponse, ApiCreatedResponse } from "@nestjs/swagger";
+import {
+  ApiTags,
+  ApiOkResponse,
+  ApiNotFoundResponse,
+  ApiBadRequestResponse,
+  ApiCreatedResponse
+} from "@nestjs/swagger";
 
 import { CarService } from "./car.service";
 import { Car } from "./interfaces/car.interface";
@@ -19,7 +25,7 @@ import { Manufacturer } from "../manufacturer/interfaces/manufacturer.interface"
 import { UpdateCarDto } from "./interfaces/dto/updateCar.dto";
 import { CreateCarDto } from "./interfaces/dto/createCar.dto";
 
-@ApiTags('cars')
+@ApiTags("cars")
 @Controller("cars")
 export class CarController {
   constructor(private readonly carService: CarService) {}

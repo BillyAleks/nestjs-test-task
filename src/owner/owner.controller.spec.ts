@@ -30,21 +30,17 @@ describe("Owner Controller", () => {
       ]
     }).compile();
 
-    ownerControllerMock = module.get<OwnerController>(
-      OwnerController
-    );
-    ownerServiceMock = module.get<OwnerService>(
-      OwnerService
-    );
+    ownerControllerMock = module.get<OwnerController>(OwnerController);
+    ownerServiceMock = module.get<OwnerService>(OwnerService);
 
     ownersMock = [
-        {
-          id: "b4ebd41e-6c64-414b-b55a-95895688aad5",
-          name: "test",
-          purchaseDate: now,
-          createdAt: now,
-          updatedAt: now
-        }
+      {
+        id: "b4ebd41e-6c64-414b-b55a-95895688aad5",
+        name: "test",
+        purchaseDate: now,
+        createdAt: now,
+        updatedAt: now
+      }
     ];
 
     dtoMock = {
@@ -61,9 +57,7 @@ describe("Owner Controller", () => {
       delete: jest.fn(async () => {})
     };
 
-    ownerControllerMock = new OwnerController(
-      ownerServiceMock as OwnerService
-    );
+    ownerControllerMock = new OwnerController(ownerServiceMock as OwnerService);
   });
 
   it("should be defined", () => {
@@ -87,9 +81,7 @@ describe("Owner Controller", () => {
   });
 
   test("should return a owner object", async () => {
-    const res = await ownerControllerMock.findOne(
-      ownersMock[0].id
-    );
+    const res = await ownerControllerMock.findOne(ownersMock[0].id);
 
     expect(res).toEqual(ownersMock[0]);
   });
@@ -99,9 +91,9 @@ describe("Owner Controller", () => {
       throw new Error();
     });
 
-    await expect(
-      ownerControllerMock.findOne(fakeId)
-    ).rejects.toThrowError(NotFoundException);
+    await expect(ownerControllerMock.findOne(fakeId)).rejects.toThrowError(
+      NotFoundException
+    );
   });
 
   test("should fails with error if entity to create is not satisfying by parameters", async () => {
@@ -109,9 +101,9 @@ describe("Owner Controller", () => {
       throw new Error("400");
     });
 
-    await expect(
-      ownerControllerMock.create(dtoMock)
-    ).rejects.toThrowError(BadRequestException);
+    await expect(ownerControllerMock.create(dtoMock)).rejects.toThrowError(
+      BadRequestException
+    );
   });
 
   test("ownerService function should be called with dtoMock within create method", async () => {
@@ -142,9 +134,9 @@ describe("Owner Controller", () => {
       throw new Error("400");
     });
 
-    await expect(
-      ownerControllerMock.put(fakeId, dtoMock)
-    ).rejects.toThrowError(BadRequestException);
+    await expect(ownerControllerMock.put(fakeId, dtoMock)).rejects.toThrowError(
+      BadRequestException
+    );
   });
 
   test("should fails with error if entity to update is not satisfying by parameters", async () => {
@@ -187,9 +179,7 @@ describe("Owner Controller", () => {
   test("ownerService function should be called with id within delete method", async () => {
     await ownerControllerMock.delete(ownersMock[0].id);
 
-    expect(ownerServiceMock.delete).toBeCalledWith(
-      ownersMock[0].id
-    );
+    expect(ownerServiceMock.delete).toBeCalledWith(ownersMock[0].id);
   });
 
   test("should fails with error if there is no owner to delete", async () => {
@@ -197,10 +187,8 @@ describe("Owner Controller", () => {
       throw new Error("404");
     });
 
-    await expect(
-      ownerControllerMock.delete(fakeId)
-    ).rejects.toThrowError(NotFoundException);
+    await expect(ownerControllerMock.delete(fakeId)).rejects.toThrowError(
+      NotFoundException
+    );
   });
-
-
 });

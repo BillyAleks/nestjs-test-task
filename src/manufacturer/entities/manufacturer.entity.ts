@@ -23,7 +23,7 @@ export class Manufacturer {
   cars: Car[];
   @Column()
   phone: string;
-  @Column({type: "bigint"})
+  @Column({ type: "bigint" })
   siret: number;
   @CreateDateColumn()
   createdAt: Date;

@@ -140,7 +140,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if there not all required field for owner creation", async () => {
         await request(url)
           .post(`/owners`)
-          .send({ name: "test"})
+          .send({ name: "test" })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -266,7 +266,11 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create with siret not a number", async () => {
         await request(url)
           .post(`/manufacturers`)
-          .send({ name: "test", phone: "3806612345678", siret: "12345678901234" })
+          .send({
+            name: "test",
+            phone: "3806612345678",
+            siret: "12345678901234"
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -276,7 +280,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if there not all required field for creation", async () => {
         await request(url)
           .post(`/manufacturers`)
-          .send({ name: "test", phone: "3806612345678"})
+          .send({ name: "test", phone: "3806612345678" })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -406,7 +410,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create with manufacturerI not in uuid string format", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId: "1234", ownersIds, price: 2000 })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId: "1234",
+            ownersIds,
+            price: 2000
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -416,7 +425,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create with ownersIds not an array", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId, ownersIds: fakeId, price: 2000  })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId,
+            ownersIds: fakeId,
+            price: 2000
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -426,7 +440,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create with ownersIds not not in uuid string format", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId, ownersIds: ["1234"], price: 2000  })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId,
+            ownersIds: ["1234"],
+            price: 2000
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -436,7 +455,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create a car with price not a number", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId, ownersIds,  price: "2000" })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId,
+            ownersIds,
+            price: "2000"
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -446,7 +470,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, if try to create a car with first registration date as a string", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: "13.02.2020", manufacturerId, ownersIds,  price: 2000 })
+          .send({
+            firstRegistrationDate: "13.02.2020",
+            manufacturerId,
+            ownersIds,
+            price: 2000
+          })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual(`Bad Request`);
@@ -466,7 +495,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 404, trying to create with not existing manufacturer", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId: fakeId, ownersIds,  price: 2000 })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId: fakeId,
+            ownersIds,
+            price: 2000
+          })
           .expect(404)
           .then(res => {
             expect(res.body).toEqual({
@@ -480,7 +514,12 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 404, trying to create with not existing owners", async () => {
         await request(url)
           .post(`/cars`)
-          .send({ firstRegistrationDate: new Date(), manufacturerId, ownersIds: [fakeId],  price: 2000 })
+          .send({
+            firstRegistrationDate: new Date(),
+            manufacturerId,
+            ownersIds: [fakeId],
+            price: 2000
+          })
           .expect(404)
           .then(res => {
             expect(res.body).toEqual({
@@ -528,7 +567,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, when manufacturerId is not in uuid string format ", async () => {
         await request(url)
           .patch(`/cars/${carId}`)
-          .send({ manufacturerId: "1234"})
+          .send({ manufacturerId: "1234" })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual("Bad Request");
@@ -538,7 +577,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 404, when manufacturerId is not associate with existing manufacturer ", async () => {
         await request(url)
           .patch(`/cars/${carId}`)
-          .send({ manufacturerId: fakeId})
+          .send({ manufacturerId: fakeId })
           .expect(404)
           .then(res => {
             expect(res.body).toEqual({
@@ -552,7 +591,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 400, when ownersIds is not in uuid string format ", async () => {
         await request(url)
           .patch(`/cars/${carId}`)
-          .send({ ownersIds: ["1234"]})
+          .send({ ownersIds: ["1234"] })
           .expect(400)
           .then(res => {
             expect(res.body.error).toEqual("Bad Request");
@@ -562,7 +601,7 @@ describe(`ExceptionScenario: url: ${url}`, () => {
       test("Should return 404, when ownersIds is not associate with existing owners ", async () => {
         await request(url)
           .patch(`/cars/${carId}`)
-          .send({ ownersIds: [fakeId]})
+          .send({ ownersIds: [fakeId] })
           .expect(404)
           .then(res => {
             expect(res.body).toEqual({

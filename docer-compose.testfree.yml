@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    container_name: 'DB'
+    image: 'mysql:5.6'
+    restart: 'always'
+    environment:
+      - MYSQL_ROOT_PASSWORD=car-data-center
+      - MYSQL_DATABASE=car-data-center
+      - MYSQL_USER=car-data-center
+      - MYSQL_PASSWORD=car-data-center
+    ports:
+      - '3306:3306'
+  app:
+    container_name: 'App'
+    build:
+      context: './'
+      dockerfile: './Dockerfile'
+    environment: 
+      - PORT=3000
+      - DB_MYSQL_HOST=db
+      - DB_MYSQL_PORT=3306
+      - DB_MYSQL_USERNAME=car-data-center
+      - DB_MYSQL_PASSWORD=car-data-center
+      - DB_MYSQL_DATABASE=car-data-center
+    restart: 'always'
+    command: npm run start:docker-prod
+    links:
+      - db
+    depends_on:
+      - db
+    ports: 
+      - '3000:3000'

@@ -15,9 +15,15 @@ import { ManufacturerService } from "./manufacturer.service";
 import { CreateManufacturerDto } from "./interfaces/dto/createManufacturer.dto";
 import { UpdateManufacturerDto } from "./interfaces/dto/updateManufacturer.dto";
 import { Manufacturer } from "./entities/manufacturer.entity";
-import { ApiTags, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestResponse, ApiCreatedResponse } from "@nestjs/swagger";
+import {
+  ApiTags,
+  ApiOkResponse,
+  ApiNotFoundResponse,
+  ApiBadRequestResponse,
+  ApiCreatedResponse
+} from "@nestjs/swagger";
 
-@ApiTags('manufacturers')
+@ApiTags("manufacturers")
 @Controller("manufacturers")
 export class ManufacturerController {
   constructor(private readonly manufacturerService: ManufacturerService) {}

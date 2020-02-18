@@ -15,9 +15,15 @@ import { OwnerService } from "./owner.service";
 import { CreateOwnerDto } from "./interfaces/dto/createOwner.dto";
 import { UpdateOwnerDto } from "./interfaces/dto/updateOwner.dto";
 import { Owner } from "./entities/owner.entity";
-import { ApiTags, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestResponse, ApiCreatedResponse } from "@nestjs/swagger";
+import {
+  ApiTags,
+  ApiOkResponse,
+  ApiNotFoundResponse,
+  ApiBadRequestResponse,
+  ApiCreatedResponse
+} from "@nestjs/swagger";
 
-@ApiTags('owners')
+@ApiTags("owners")
 @Controller("owners")
 export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}
@@ -87,8 +93,7 @@ export class OwnerController {
     } catch (error) {
       if (error.message.includes("404")) {
         throw new NotFoundException(error.message);
-      } else 
-      throw new BadRequestException(error.message);
+      } else throw new BadRequestException(error.message);
     }
   }
 

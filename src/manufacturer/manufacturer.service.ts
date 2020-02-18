@@ -99,4 +99,3 @@ export class ManufacturerService {
     await this.manufacturerRepository.delete(id);
   }
 }
-

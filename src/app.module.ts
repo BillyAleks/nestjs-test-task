@@ -6,6 +6,12 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
-  imports: [CarModule, ManufacturerModule, OwnerModule, TypeOrmModule.forRoot(), ScheduleModule.forRoot()]
+  imports: [
+    CarModule,
+    ManufacturerModule,
+    OwnerModule,
+    TypeOrmModule.forRoot(),
+    ScheduleModule.forRoot()
+  ]
 })
 export class AppModule {}

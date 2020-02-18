@@ -26,25 +26,40 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
+*Technical Stack:* Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM
 
-## Installation
+# Run an application (*Docker*)
+
+## Test Use Case
 
 ```bash
-$ npm install
+#Run the use case with unit tests and end to end tests.
+$ npm run start:docker-app
 ```
 
-## Running the app
+## Test free Use Case
 
 ```bash
-# development
-$ npm run start
+#Run the use case without tests.
+$ npm run start:docker-app:testfree
+```
 
-# watch mode
+# Run an application (*Local*)
+
+## Start an application
+
+1. Package installation.
+```
+$ npm i
+```
+2. Start Database.
+```
+$ npm run start:db
+```
+3. Run migration and start API.
+```
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -54,22 +69,12 @@ $ npm run start:prod
 $ npm run test
 
 # e2e tests
-$ npm run test:e2e
+$ npm run test:e2e:run
 
 # test coverage
 $ npm run test:cov
 ```
 
-## Support
+# Swagger
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
+If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
