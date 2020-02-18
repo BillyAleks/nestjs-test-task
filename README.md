@@ -29,7 +29,7 @@
 **Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
 >*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
 
-# Run an application (*Docker*)
+# Run an application *(Docker)*
 
 ## Test Use Case
 
@@ -45,7 +45,7 @@ $ npm run start:docker-app
 $ npm run start:docker-app:testfree
 ```
 
-# Run an application (*Local*)
+# Run an application *(Local)*
 
 ## Start an application
 
