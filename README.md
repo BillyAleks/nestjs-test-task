@@ -23,12 +23,12 @@
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
+____________________________________________________________________________________________________________________________
 ## Description
 
 **Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
 >*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
-
+____________________________________________________________________________________________________________________________
 # Run an application *(Docker)*
 
 ## Test Use Case
@@ -44,7 +44,7 @@ $ npm run start:docker-app
 # Run the use case without tests.
 $ npm run start:docker-app:testfree
 ```
-
+____________________________________________________________________________________________________________________________
 # Run an application *(Local)*
 
 ## Start an application
@@ -73,4 +73,5 @@ $ npm run test:e2e:run
 $ npm run test:cov
 ```
 ____________________________________________________________________________________________________________________________
+### Swagger
 >If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
