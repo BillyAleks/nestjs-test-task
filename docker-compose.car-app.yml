@@ -20,27 +20,15 @@ services:
         --innodb-large-prefix=true
         --max-allowed-packet=4M
 
-    networks:
-      - backend
-
   api:
     build:
       context: .
-      dockerfile: Dockerfile.car-app
-    command: /bin/bash -c "sleep 10s; npx typeorm migration:run; node /dist/main.js"
+      dockerfile: Dockerfile
+    restart: 'always'
+    command: npm run start:prod
     ports:
       - "3000:3000"
-    environment:
-      BASE_URL: http://api:3000
-      DB_MYSQL_HOST: db
-      DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: car-data-center
-      DB_MYSQL_PASSWORD: car-data-center
-      DB_MYSQL_DATABASE: car-data-center
+    links:
+      - db
     depends_on:
       - db
-    networks:
-      - backend
-
-networks:
-  backend:

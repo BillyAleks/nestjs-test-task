@@ -19,7 +19,7 @@
     "start:prod": "node dist/main",
     "start:docker-app": "docker-compose --file docker-compose.car-app.yml up -d",
     "build:e2e:executor": "docker build . -t e2e-executor --file Dockerfile.e2e-executor",
-    "docker:run:app": "docker run -e'DB_MYSQL_HOST=db' -e'API_BASE_URL=http://localhost:3000' --network car-data-center-api_backend e2e-executor",
+    "docker:run:app": "docker run -e'DB_MYSQL_HOST=db' -e'API_BASE_URL=http://localhost:3000",
     "start:db": "docker-compose --file docker-compose.db.yml up --build",
     "stop:db": "docker-compose --file docker-compose.db.yml stop; docker-compose --file docker-compose.db.yml rm -f -s;",
     "start:docker": "npm run start:docker-app && npm run build:e2e:executor && npm run docker:run:app",
