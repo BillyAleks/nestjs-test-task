@@ -34,14 +34,14 @@
 ## Test Use Case
 
 ```bash
-#Run the use case with unit tests and end to end tests.
+# Run the use case with unit tests and end to end tests.
 $ npm run start:docker-app
 ```
 
 ## Test free Use Case
 
 ```bash
-#Run the use case without tests.
+# Run the use case without tests.
 $ npm run start:docker-app:testfree
 ```
 
