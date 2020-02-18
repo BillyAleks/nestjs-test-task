@@ -72,7 +72,5 @@ $ npm run test:e2e:run
 # test coverage
 $ npm run test:cov
 ```
-
-# Swagger
-
-If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
+____________________________________________________________________________________________________________________________
+>If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
