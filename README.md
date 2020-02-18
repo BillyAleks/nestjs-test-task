@@ -27,7 +27,7 @@
 ## Description
 
 **Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
-*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
+\n*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
 
 # Run an application (*Docker*)
 
