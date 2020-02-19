@@ -29,7 +29,7 @@
 **Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework
 >Little backend micro-service which aims to serve the cars data
 >Exposition of REST API, providing CRUD operations with additional features
->*Technical Stack: Nest.js, MySQL, Docker, TypeScript, Jest, Swagger, TypeORM*
+*Technical Stack: Nest.js, MySQL, Docker, TypeScript, Jest, Swagger, TypeORM*
 
 # Run an application *(Docker)*
 
