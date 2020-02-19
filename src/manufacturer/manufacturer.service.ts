@@ -14,9 +14,7 @@ export class ManufacturerService {
   ) {}
 
   async findAll(): Promise<Manufacturer[]> {
-    const manufacturers = await this.manufacturerRepository
-      .createQueryBuilder("manufacturer")
-      .getMany();
+    const manufacturers = await this.manufacturerRepository.find();
     if (manufacturers.length === 0) {
       throw new Error("Error(404): No manufacturers were found");
     }
@@ -32,15 +30,6 @@ export class ManufacturerService {
   }
 
   async create(manufacturerToCreate: CreateManufacturerDto): Promise<void> {
-    if (
-      !manufacturerToCreate.name ||
-      !manufacturerToCreate.phone ||
-      !manufacturerToCreate.siret
-    ) {
-      throw new Error(
-        "Error(400): Bad Request, all required fields should be pointed"
-      );
-    }
     const manufacturer = this.manufacturerRepository.create({
       name: manufacturerToCreate.name,
       phone: manufacturerToCreate.phone,
@@ -74,13 +63,6 @@ export class ManufacturerService {
     id: string,
     manufacturerToPut: CreateManufacturerDto
   ): Promise<void> {
-    if (
-      !manufacturerToPut.name ||
-      !manufacturerToPut.phone ||
-      !manufacturerToPut.siret
-    ) {
-      throw new Error("Error(400): All fields are required");
-    }
     const manufacturer = await this.manufacturerRepository.findOne(id);
     if (manufacturer) {
       this.update(id, manufacturerToPut);

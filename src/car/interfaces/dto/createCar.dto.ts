@@ -14,15 +14,18 @@ export class CreateCarDto {
   @ApiProperty()
   @IsString()
   @IsUUID()
+  @IsNotEmpty()
   readonly manufacturerId: string;
 
   @ApiProperty()
   @IsNumber()
   @IsPositive()
+  @IsNotEmpty()
   readonly price: number;
 
   @ApiProperty()
   @IsDateString()
+  @IsNotEmpty()
   readonly firstRegistrationDate: Date;
 
   @ApiProperty()

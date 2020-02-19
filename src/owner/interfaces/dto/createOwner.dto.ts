@@ -9,5 +9,6 @@ export class CreateOwnerDto {
 
   @ApiProperty()
   @IsDateString()
+  @IsNotEmpty()
   readonly purchaseDate: Date;
 }

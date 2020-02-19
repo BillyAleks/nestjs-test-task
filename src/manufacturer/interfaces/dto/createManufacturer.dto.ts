@@ -14,5 +14,6 @@ export class CreateManufacturerDto {
 
   @ApiProperty()
   @IsNumber()
+  @IsNotEmpty()
   readonly siret: number;
 }

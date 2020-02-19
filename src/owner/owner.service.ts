@@ -14,9 +14,7 @@ export class OwnerService {
   ) {}
 
   async findAll(): Promise<Owner[]> {
-    const owners = await this.ownerRepository
-      .createQueryBuilder("owner")
-      .getMany();
+    const owners = await this.ownerRepository.find();
     if (owners.length === 0) {
       throw new Error("Error(404): No owners were found");
     }
@@ -32,11 +30,6 @@ export class OwnerService {
   }
 
   async create(ownerToCreate: CreateOwnerDto): Promise<void> {
-    if (!ownerToCreate.name || !ownerToCreate.purchaseDate) {
-      throw new Error(
-        "Error(400): Bad Request, all required fields should be pointed"
-      );
-    }
     const owner = this.ownerRepository.create({
       name: ownerToCreate.name,
       purchaseDate: ownerToCreate.purchaseDate
@@ -59,9 +52,6 @@ export class OwnerService {
   }
 
   async put(id: string, ownerToPut: CreateOwnerDto): Promise<void> {
-    if (!ownerToPut.name || !ownerToPut.purchaseDate) {
-      throw new Error("Error(400): All fields are required");
-    }
     const owner = await this.ownerRepository.findOne(id);
     if (owner) {
       await this.update(id, ownerToPut);
