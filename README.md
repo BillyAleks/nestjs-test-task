@@ -23,42 +23,40 @@
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
+  
 ## Description
 
 **Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
-*Technical Stack:* Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM
+>*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
 
-# Run an application (*Docker*)
+# Run an application *(Docker)*
 
 ## Test Use Case
 
 ```bash
-#Run the use case with unit tests and end to end tests.
+# Run the use case with unit tests and end to end tests.
 $ npm run start:docker-app
 ```
 
 ## Test free Use Case
 
 ```bash
-#Run the use case without tests.
+# Run the use case without tests.
 $ npm run start:docker-app:testfree
 ```
-
-# Run an application (*Local*)
+____________________________________________________________________________________________________________________________
+# Run an application *(Local)*
 
 ## Start an application
 
-1. Package installation.
-```
+```bash
+# package installation.
 $ npm i
-```
-2. Start Database.
-```
+
+# start database.
 $ npm run start:db
-```
-3. Run migration and start API.
-```
+
+# run migration and start API.
 $ npm run start:dev
 ```
 
@@ -75,6 +73,5 @@ $ npm run test:e2e:run
 $ npm run test:cov
 ```
 
-# Swagger
-
-If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
+### Swagger
+>If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
