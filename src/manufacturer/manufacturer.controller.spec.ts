@@ -11,7 +11,7 @@ import { NotFoundException, BadRequestException } from "@nestjs/common";
 const now = new Date();
 const fakeId = "123e4567-e89b-12d3-a456-426655440000";
 
-let manufacturerServiceMock: Partial<ManufacturerService>;
+let manufacturerService: Partial<ManufacturerService>;
 let manufacturersMock: Manufacturer[];
 let dtoMock: CreateManufacturerDto;
 let manufacturerControllerMock: ManufacturerController;
@@ -33,9 +33,7 @@ describe("Manufacturer Controller", () => {
     manufacturerControllerMock = module.get<ManufacturerController>(
       ManufacturerController
     );
-    manufacturerServiceMock = module.get<ManufacturerService>(
-      ManufacturerService
-    );
+    manufacturerService = module.get<ManufacturerService>(ManufacturerService);
 
     manufacturersMock = [
       {
@@ -55,7 +53,7 @@ describe("Manufacturer Controller", () => {
       siret: 12345678901234
     };
 
-    manufacturerServiceMock = {
+    manufacturerService = {
       findAll: jest.fn(async () => manufacturersMock),
       findOne: jest.fn(async () => manufacturersMock[0]),
       create: jest.fn(async () => {}),
@@ -65,7 +63,7 @@ describe("Manufacturer Controller", () => {
     };
 
     manufacturerControllerMock = new ManufacturerController(
-      manufacturerServiceMock as ManufacturerService
+      manufacturerService as ManufacturerService
     );
   });
 
@@ -80,7 +78,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if no manufacturers were found", async () => {
-    manufacturerServiceMock.findAll = jest.fn(async () => {
+    manufacturerService.findAll = jest.fn(async () => {
       throw new Error();
     });
 
@@ -98,7 +96,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if no manufacturer was found", async () => {
-    manufacturerServiceMock.findOne = jest.fn(async () => {
+    manufacturerService.findOne = jest.fn(async () => {
       throw new Error();
     });
 
@@ -108,7 +106,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if entity to create is not satisfying by parameters", async () => {
-    manufacturerServiceMock.create = jest.fn(async () => {
+    manufacturerService.create = jest.fn(async () => {
       throw new Error("400");
     });
 
@@ -120,7 +118,7 @@ describe("Manufacturer Controller", () => {
   test("manufacturerService function should be called with dtoMock within create method", async () => {
     await manufacturerControllerMock.create(dtoMock);
 
-    expect(manufacturerServiceMock.create).toBeCalledWith(
+    expect(manufacturerService.create).toBeCalledWith(
       expect.objectContaining({
         name: expect.any(String),
         phone: expect.any(String),
@@ -132,7 +130,7 @@ describe("Manufacturer Controller", () => {
   test("manufacturerService function should be called with id and dtoMock within put method", async () => {
     await manufacturerControllerMock.put(fakeId, dtoMock);
 
-    expect(manufacturerServiceMock.put).toBeCalledWith(
+    expect(manufacturerService.put).toBeCalledWith(
       fakeId,
       expect.objectContaining({
         name: expect.any(String),
@@ -143,7 +141,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if entity to put is not satisfying by parameters", async () => {
-    manufacturerServiceMock.put = jest.fn(async () => {
+    manufacturerService.put = jest.fn(async () => {
       throw new Error("400");
     });
 
@@ -153,7 +151,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if entity to update is not satisfying by parameters", async () => {
-    manufacturerServiceMock.update = jest.fn(async () => {
+    manufacturerService.update = jest.fn(async () => {
       throw new Error("400");
     });
 
@@ -165,7 +163,7 @@ describe("Manufacturer Controller", () => {
   });
 
   test("should fails with error if entity to update was not found", async () => {
-    manufacturerServiceMock.update = jest.fn(async () => {
+    manufacturerService.update = jest.fn(async () => {
       throw new Error("404");
     });
 
@@ -181,7 +179,7 @@ describe("Manufacturer Controller", () => {
       siret: 43210987654321
     });
 
-    expect(manufacturerServiceMock.update).toBeCalledWith(
+    expect(manufacturerService.update).toBeCalledWith(
       manufacturersMock[0].id,
       expect.objectContaining({
         siret: expect.any(Number)
@@ -192,13 +190,11 @@ describe("Manufacturer Controller", () => {
   test("manufacturerService function should be called with id within delete method", async () => {
     await manufacturerControllerMock.delete(manufacturersMock[0].id);
 
-    expect(manufacturerServiceMock.delete).toBeCalledWith(
-      manufacturersMock[0].id
-    );
+    expect(manufacturerService.delete).toBeCalledWith(manufacturersMock[0].id);
   });
 
   test("should fails with error if there is no manufacturer to delete", async () => {
-    manufacturerServiceMock.delete = jest.fn(async () => {
+    manufacturerService.delete = jest.fn(async () => {
       throw new Error("404");
     });
 

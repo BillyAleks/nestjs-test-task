@@ -16,8 +16,6 @@ let dtoMock: CreateOwnerDto;
 let ownerControllerMock: OwnerController;
 
 describe("Owner Controller", () => {
-  let controller: OwnerController;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OwnerController],
