@@ -26,22 +26,24 @@
   
 ## Description
 
-**Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework.
->*Technical Stack: Nest.js, MySQL, TypeScript, Jest, Swagger, TypeORM*
+**Car Data Center API** written with [Nest](https://github.com/nestjs/nest) framework
+>Little backend micro-service which aims to serve the cars data
+>Exposition of REST API, providing CRUD operations with additional features
+>*Technical Stack: Nest.js, MySQL, Docker, TypeScript, Jest, Swagger, TypeORM*
 
 # Run an application *(Docker)*
 
 ## Test Use Case
 
 ```bash
-# Run the use case with unit tests and end to end tests.
+# Run the use case with unit tests and end to end tests
 $ npm run start:docker-app
 ```
 
 ## Test free Use Case
 
 ```bash
-# Run the use case without tests.
+# Run the use case without tests
 $ npm run start:docker-app:testfree
 ```
 ____________________________________________________________________________________________________________________________
@@ -50,13 +52,13 @@ ________________________________________________________________________________
 ## Start an application
 
 ```bash
-# package installation.
+# package installation
 $ npm i
 
-# start database.
+# start database
 $ npm run start:db
 
-# run migration and start API.
+# run migration and start API
 $ npm run start:dev
 ```
 
@@ -74,4 +76,4 @@ $ npm run test:cov
 ```
 
 ### Swagger
->If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive.
+>If your server is up - you can always use [Swagger](http://localhost:3000/api) to make development process more comfortable and productive
