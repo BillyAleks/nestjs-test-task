@@ -6,6 +6,7 @@ COPY ./package-lock.json ./
 COPY tsconfig*.json ./
 COPY src ./src/
 COPY test ./test/
+COPY mysql ./mysql/
 COPY ormconfig.js ./
 RUN npm i && npm run build
 

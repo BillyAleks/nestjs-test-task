@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "mysql"],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,

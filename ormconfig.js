@@ -12,7 +12,7 @@ module.exports = {
     keepConnectionAlive: true,
     cli: {
         entitiesDir: "src/**/*.entity.ts",
-        migrationsDir: "src/mysql/migration"
+        migrationsDir: "mysql/migration"
     },
     connectTimeout: 180000
 }
